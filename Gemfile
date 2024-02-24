@@ -49,6 +49,7 @@ gem "bootsnap", require: false
 
 gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'faker', '~> 3.2', '>= 3.2.3'
+gem 'pagy', '~> 7.0', '>= 7.0.5'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

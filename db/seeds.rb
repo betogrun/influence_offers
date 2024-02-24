@@ -1,9 +1,13 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Generate Offers
+
+age_groups = [ 0..100, 0..12, 13..18, 19..25, 26..40, 41..60, 61..100, 0..18, 19..100 ]
+genders = %w(male female all)
+
+100.times do
+  Offer.create!(
+    title: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph,
+    target_gender: genders.sample,
+    target_range_age: age_groups.sample
+  )
+end
