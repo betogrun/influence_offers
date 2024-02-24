@@ -1,0 +1,2 @@
+module ClaimedOffersHelper
+end
