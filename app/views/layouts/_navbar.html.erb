@@ -1,0 +1,12 @@
+<nav class="bg-blue-500 p-4 text-white">
+  <div class="container mx-auto flex justify-between items-center">
+    <%= link_to "INFLUENCE OFFERS", root_path, class: "text-lg font-bold" %>
+    <div>
+      <% if player_signed_in? %>
+        <%= button_to "Logout", destroy_player_session_path, method: :delete, form: { "data-turbo" => "false" }, class: "px-4 py-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded" %>
+      <% else %>
+        <%= button_to "Log in", new_player_session_path, method: :get, class: "px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-bold rounded" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
