@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'offers/index'
+  get 'offers/show'
   get 'home/index'
   devise_for :players, controllers: { registrations: 'player/registrations' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
