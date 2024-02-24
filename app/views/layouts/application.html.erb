@@ -12,12 +12,11 @@
   </head>
 
   <body class="flex flex-col min-h-screen bg-gray-100">
-  <%= render 'layouts/navbar' %>
-  <main class="flex-1 container mx-auto px-5 py-10">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </main>
-  <%= render 'layouts/footer' %>
-</body>
+    <%= render 'layouts/messages' %>
+    <%= render 'layouts/navbar' %>
+    <main class="flex-1 container mx-auto px-5 py-10">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>
