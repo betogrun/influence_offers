@@ -4,6 +4,21 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.select :gender, [['Male', 'male'], ['Female', 'female'], ['Prefer not to say', 'prefer_not_to_say']], {}, { required: true, include_blank: true } %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
