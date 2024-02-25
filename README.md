@@ -51,5 +51,5 @@ rpsec
 
 Please, feel free to reach out to me!
 
-Name: Alberto Rocha
-Email: [betogrun@gmail.com](mailto:betogrun@gmail.com)
+- Name: Alberto Rocha
+- Email: [betogrun@gmail.com](mailto:betogrun@gmail.com)
