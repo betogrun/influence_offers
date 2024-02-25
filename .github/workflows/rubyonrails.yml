@@ -5,11 +5,13 @@
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests.
 name: "Ruby on Rails CI"
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -28,14 +30,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
-        with:
-          bundler-cache: true
-      # Add or replace database setup steps here
+
+      # Replace the Ruby installation step with manual installation steps
+      - name: Install dependencies for Ruby
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
+      - name: Install Ruby
+        run: |
+          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+          source ~/.bashrc
+          git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+          rbenv install 3.3.0
+          rbenv global 3.3.0
+          ruby -v
+      - name: Install Bundler and gems
+        run: |
+          gem install bundler
+          bundle install
+
+      # Database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
-      # Add or replace test runners here
+
+      # Test runner
       - name: Run tests
         run: rspec
