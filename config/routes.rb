@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :offers, only: [:index, :show]
+  resources :claimed_offers, only: [:index, :create, :show]
   devise_for :players, controllers: { registrations: 'player/registrations' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

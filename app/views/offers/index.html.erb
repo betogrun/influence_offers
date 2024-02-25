@@ -1,17 +1,21 @@
 <div class="max-w-4xl mx-auto px-4 py-8">
   <h1 class="text-2xl font-bold text-center mb-6">Available Offers</h1>
-  <div class='pagy mt-4 mb-4 flex justify-end'>
-    <%= pagy_nav(@pagy).html_safe %>
-  </div>
-  <div class="grid grid-cols-1 gap-4">
-    <% @offers.each do |offer| %>
-      <div class="flex justify-between items-center bg-white p-4 shadow rounded-lg">
-        <h2 class="text-xl font-semibold"><%= offer.title %></h2>
-        <%= link_to 'Show', offer_path(offer), class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition ease-in-out duration-150" %>
-      </div>
-    <% end %>
-  </div>
-  <div class='pagy mt-4 mb-4 flex justify-end'>
-    <%= pagy_nav(@pagy).html_safe %>
-  </div>
+  <% if @offers.empty? %>
+    <p class="text-center">No offers found.</p>
+  <% else %>
+    <div class='pagy mt-4 mb-4 flex justify-end'>
+      <%= pagy_nav(@pagy).html_safe %>
+    </div>
+    <div class="grid grid-cols-1 gap-4">
+      <% @offers.each do |offer| %>
+        <div class="flex justify-between items-center bg-white p-4 shadow rounded-lg">
+          <h2 class="text-xl font-semibold"><%= offer.title %></h2>
+          <%= link_to 'Show', offer_path(offer), class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition ease-in-out duration-150" %>
+        </div>
+      <% end %>
+    </div>
+    <div class='pagy mt-4 mb-4 flex justify-end'>
+      <%= pagy_nav(@pagy).html_safe %>
+    </div>
+  <% end %>
 </div>

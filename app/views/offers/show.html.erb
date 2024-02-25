@@ -2,6 +2,9 @@
   <div class="bg-white shadow rounded-lg p-6">
     <h1 class="text-2xl font-bold mb-4"><%= @offer.title %></h1>
     <p class="text-lg text-gray-700"><%= @offer.description %></p>
-    <%= link_to 'Back to Offers', offers_path, class: "mt-4 inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:border-gray-300 focus:shadow-outline-gray active:bg-gray-300 transition ease-in-out duration-150" %>
+    <div class="flex items-center space-x-4 mt-4">
+      <%= button_to 'Claim!', claimed_offers_path(offer_id: @offer.id), method: :post, class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150" %>  
+      <%= link_to 'Back to Offers', offers_path, class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:border-gray-300 focus:shadow-outline-gray active:bg-gray-300 transition ease-in-out duration-150" %>
+    </div>
   </div>
 </div>
