@@ -15,6 +15,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    container:
+      image: mcr.microsoft.com/devcontainers/ruby:1-3.3-bullseye
+    
     services:
       postgres:
         image: postgres:11-alpine
@@ -24,27 +28,20 @@ jobs:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
+    
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Ruby
+      # Como a imagem já possui Ruby e outras ferramentas, essa etapa é simplificada
+      - name: Setup Bundler and install dependencies
         run: |
-          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $GITHUB_ENV
-          echo 'export PATH="$HOME/.rbenv/shims:$PATH"' >> $GITHUB_ENV
-          git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          ~/.rbenv/bin/rbenv install 3.3.0
-          ~/.rbenv/bin/rbenv global 3.3.0
-          ruby -v
-
-      - name: Install Bundler and gems
-        run: |
-          gem install bundler
-          bundle install
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3
 
       - name: Set up database schema
         run: bin/rails db:schema:load
