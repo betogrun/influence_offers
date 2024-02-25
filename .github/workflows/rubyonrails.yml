@@ -31,30 +31,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Replace the Ruby installation step with manual installation steps
-      - name: Install dependencies for Ruby
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
       - name: Install Ruby
         run: |
           git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-          source ~/.bashrc
+          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $GITHUB_ENV
+          echo 'export PATH="$HOME/.rbenv/shims:$PATH"' >> $GITHUB_ENV
           git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          rbenv install 3.3.0
-          rbenv global 3.3.0
+          ~/.rbenv/bin/rbenv install 3.3.0
+          ~/.rbenv/bin/rbenv global 3.3.0
           ruby -v
+
       - name: Install Bundler and gems
         run: |
           gem install bundler
           bundle install
 
-      # Database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
 
-      # Test runner
       - name: Run tests
         run: rspec
